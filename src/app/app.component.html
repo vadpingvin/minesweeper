@@ -1,0 +1,27 @@
+<div class="container" [ngStyle]="{'width.px': (24 * width)}">
+  <div>
+    <table *ngIf="minefield" class="minefield">
+      <tr *ngFor="let row of minefield; let columnIndex = index">
+        <td *ngFor="let cell of row; let rowIndex = index"
+        (click)="select($event, cell, columnIndex, rowIndex)"
+        (dblclick)="selectNeighbours($event, cell, columnIndex, rowIndex)"
+        (contextmenu)="flag($event, cell, columnIndex, rowIndex)">
+        <img src="assets/{{cell.imageSrc}}" />
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div class="separator"></div>
+  <div>
+    <input type="text" maxlength="2" [(ngModel)]="newWidth" /> width
+    <br />
+    <input type="text" maxlength="2" [(ngModel)]="newHeight" /> height
+    <br />
+    <input type="text" maxlength="3" [(ngModel)]="newMaxMineCount" /> max mine count
+    <br />
+    <button (click)="restart()">Restart</button>
+  </div>
+  <div class="separator"></div>
+  <div *ngIf="gameState == 1" class="lose">Game over</div>
+  <div *ngIf="gameState == 2" class="win">Victory</div>
+</div>

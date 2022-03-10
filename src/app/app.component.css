@@ -1,0 +1,36 @@
+body {
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.container {
+    margin: 0 auto;
+}
+
+.minefield {
+    line-height: 0;
+    border-spacing: 0;
+}
+
+.minefield td {
+    padding:0
+}
+
+.lose {
+    color: red;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.win {
+    color: green;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.separator {
+    height: 2rem;
+}
+
+input {
+    width: 2rem;
+}
