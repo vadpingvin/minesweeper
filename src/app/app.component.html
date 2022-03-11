@@ -13,11 +13,15 @@
   </div>
   <div class="separator"></div>
   <div>
+    <span *ngIf="gameState == 0 && flagCounter &lt; 0"><b>Too much</b> mines found...</span>
+    <span *ngIf="gameState == 0 && flagCounter == 1"><b>Last</b> mine to find...</span>
+    <span *ngIf="gameState == 0 && flagCounter &gt; 1"><b>{{flagCounter}}</b> mines to find...</span>
+    <br />
     <input type="text" maxlength="2" [(ngModel)]="newWidth" /> width
     <br />
     <input type="text" maxlength="2" [(ngModel)]="newHeight" /> height
     <br />
-    <input type="text" maxlength="3" [(ngModel)]="newMaxMineCount" /> max mine count
+    <input type="text" maxlength="2" [(ngModel)]="newMinePercent" /> % mine probability
     <br />
     <button (click)="restart()">Restart</button>
   </div>

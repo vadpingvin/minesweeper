@@ -6,12 +6,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  width: number = 20;
-  height: number = 20;
-  maxMineCount: number = 100;
+  width: number = 15;
+  height: number = 10;
+  minePercent: number = 20;
+  flagCounter: number = 0;
   newWidth: number;
   newHeight: number;
-  newMaxMineCount: number;
+  newMinePercent: number;
   minefield: Cell[][] = null;
   gameState: number = 0;
   readonly allowSingleClickSelectNeighbours: boolean = true;
@@ -19,7 +20,7 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.newWidth = this.width;
     this.newHeight = this.height;
-    this.newMaxMineCount = this.maxMineCount;
+    this.newMinePercent = this.minePercent;
     this.restart();
   }
 
@@ -31,8 +32,10 @@ export class AppComponent implements OnInit {
     }
     if (cell.flag) {
       cell.flag = false;
+      this.flagCounter++;
     } else if (cell.hidden) {
       cell.flag = true;
+      this.flagCounter--;
     }
   }
 
@@ -134,7 +137,8 @@ export class AppComponent implements OnInit {
     this.gameState = 0;
     this.width = this.newWidth;
     this.height = this.newHeight;
-    this.maxMineCount = this.newMaxMineCount;
+    this.minePercent = this.newMinePercent;
+    this.flagCounter = 0;
     this.minefield = [];
     // base field
     for (let i = 0; i < this.height; i++) {
@@ -146,10 +150,13 @@ export class AppComponent implements OnInit {
       this.minefield.push(row);
     }
     // mines
-    for (let i = 0; i < this.maxMineCount; i++) {
-      const c: number = Math.floor(Math.random() * this.height);
-      const r: number = Math.floor(Math.random() * this.width);
-      this.minefield[c][r].mine = true;
+    for (let i = 0; i < this.height; i++) {
+      for (let j = 0; j < this.width; j++) {
+        if (Math.random() * 100 < this.minePercent) {
+          this.minefield[i][j].mine = true;
+          this.flagCounter++;
+        }
+      }
     }
     // calculate count
     for (let i = 0; i < this.height; i++) {
