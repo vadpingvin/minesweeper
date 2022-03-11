@@ -1,6 +1,6 @@
 # Minesweeper
 
-Classic Minesweeper.
+Minesweeper in Angular.
 
 * Left click on covered cell: Try.
 * Right click on covered cell: Add or remove flag.
